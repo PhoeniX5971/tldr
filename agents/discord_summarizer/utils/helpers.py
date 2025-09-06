@@ -1,7 +1,5 @@
 import aiohttp
-
-SUMMARY_SERVER = "http://127.0.0.1:8000/summarize"  # replace with your IP:PORT
-
+from config import SUMMARY_SERVER
 
 async def summarize_text(text: str) -> str:
     async with aiohttp.ClientSession() as session:

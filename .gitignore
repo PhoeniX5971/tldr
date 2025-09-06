@@ -7,6 +7,7 @@ ENV/
 # Environment files (all .env recursively)
 **/.env
 **/.env.*
+!.env.example
 
 # Python cache (all __pycache__ folders recursively + compiled files)
 **/__pycache__/
