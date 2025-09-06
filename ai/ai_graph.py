@@ -43,11 +43,6 @@ llm = ChatGoogleGenerativeAI(
 graph_builder = StateGraph(State)
 
 
-# This summarizer ensures:
-# - system directive is always injected
-# - history is capped to last N messages (optional)
-
-
 def summarizer(state: State):
     # Original conversation history
     messages = state["messages"]
@@ -58,7 +53,7 @@ def summarizer(state: State):
     # Get LLM response
     response = llm.invoke(full_messages)
 
-    # Keep only the last assistant message (or adjust as needed)
+    # Keep only the last assistant message
     return {"messages": [response]}
 
 
