@@ -175,7 +175,24 @@ class General(commands.Cog, name="general"):
 
         # Send to summarizer (make sure summarize_text is async)
         summary = await summarize_text(text)
-        await ctx.send(summary)
+
+        MAX_DISCORD_CHARS = 2000
+
+        # Split by the custom cut marker
+        chunks = summary.split("<cut_here>")
+
+        for chunk in chunks:
+            chunk = chunk.strip()
+            if not chunk:
+                continue
+
+            # If chunk is longer than Discord's limit, split further
+            while len(chunk) > MAX_DISCORD_CHARS:
+                await ctx.send(chunk[:MAX_DISCORD_CHARS])
+                chunk = chunk[MAX_DISCORD_CHARS:]
+
+            if chunk:  # send remaining part
+                await ctx.send(chunk)
 
 
 async def setup(bot) -> None:
