@@ -22,8 +22,8 @@ source .venv/bin/activate  # Linux / macOS
 pip install -r requirements.txt
 ```
 
-[!Note]
-I recommend python 3.10+
+> [!Note]
+> I recommend python 3.10+
 
 3. **Copy the example environment file**:
 
