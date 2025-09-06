@@ -1,0 +1,26 @@
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Environment files (all .env recursively)
+**/.env
+**/.env.*
+
+# Python cache (all __pycache__ folders recursively + compiled files)
+**/__pycache__/
+**/*.py[cod]
+*.pyo
+*.pyd
+
+# Logs
+**/*.log
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
