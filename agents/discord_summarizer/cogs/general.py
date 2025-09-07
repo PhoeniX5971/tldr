@@ -14,7 +14,7 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 from discord.ext.commands import Context
-from agents.discord_summarizer.utils.helpers import summarize_text
+from agents.discord_summarizer.utils.helpers import summarize_text, search_text
 
 
 class General(commands.Cog, name="general"):
@@ -180,6 +180,37 @@ class General(commands.Cog, name="general"):
 
         # Split by the custom cut marker
         chunks = summary.split("<cut_here>")
+
+        for chunk in chunks:
+            chunk = chunk.strip()
+            if not chunk:
+                continue
+
+            # If chunk is longer than Discord's limit, split further
+            while len(chunk) > MAX_DISCORD_CHARS:
+                await ctx.send(chunk[:MAX_DISCORD_CHARS])
+                chunk = chunk[MAX_DISCORD_CHARS:]
+
+            if chunk:  # send remaining part
+                await ctx.send(chunk)
+
+    @commands.hybrid_command(
+        name="search", description="Performs a web search on the provided text."
+    )
+    @app_commands.describe(text="The text to search for.")
+    async def search(self, ctx, *, text: str) -> None:
+        # Make sure we have some text
+        if not text:
+            await ctx.send("Please provide text to search.")
+            return
+
+        # Send to searcher (async)
+        search_result = await search_text(text)
+
+        MAX_DISCORD_CHARS = 2000
+
+        # Split by custom cut marker if backend returns it
+        chunks = search_result.split("<cut_here>")
 
         for chunk in chunks:
             chunk = chunk.strip()

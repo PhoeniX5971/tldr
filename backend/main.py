@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from ai.ai_graph import summarize_text
+from ai.ai_graph import invoke_graph
 
 # ----------------------------
 # FastAPI setup
@@ -14,5 +14,11 @@ class MessageRequest(BaseModel):
 
 @app.post("/summarize")
 def summarize(req: MessageRequest):
-    summary = summarize_text(req.text)
+    summary = invoke_graph(req.text, node="summarizer")
     return {"summary": summary}
+
+
+@app.post("/web_search")
+def web_search(req: MessageRequest):
+    web_search = invoke_graph(req.text, node="searcher")
+    return {"web_search": web_search}
