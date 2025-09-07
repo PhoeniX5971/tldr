@@ -20,7 +20,7 @@ Phoenix and Yue discussed Linux distributions. Phoenix prefers Arch Linux,
 while Yue argues Gentoo provides more control.
 
 
-## IMPOTANT
+## IMPORTANT
 MESSAGES BIGGER THAN 2000 CHARACTERS WILL BE TRUNCATED
 So, add a `<cut_here>` to devide the response into sections,
 ADD IT LITERALLY AFTER EACH COUPLE OF SENTENCES,
